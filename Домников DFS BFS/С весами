@@ -1,0 +1,144 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <stack>
+#include <queue>
+
+
+void input();
+void SHORTEST_PATH();
+void SHORTEST_PATH_FOR_ALL();
+
+
+using namespace std;
+vector <vector<pair<int, int>>> k;
+vector <int> path;
+vector <bool> visited;
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	input();
+	SHORTEST_PATH();
+	//SHORTEST_PATH_FOR_ALL();
+	system("pause");
+}
+
+void input() // Ввод графа из списка смежности
+{
+	setlocale(LC_ALL, "Russian");
+	int m, n, f, maxSize;
+	fstream fin("C://Working/work.txt");
+	if (!fin.is_open())
+		cout << "File not open";
+	else
+	{
+		fin >> maxSize; // количество рёбер
+		while (!fin.eof())
+		{
+			fin >> m >> n >> f; // f - длина пути / m, n - вершины
+			k.resize(maxSize);
+			k[m].push_back(make_pair(f, n));
+			k[n].push_back(make_pair(f, m));
+
+		}
+	}
+	fin.close();
+}
+
+
+void SHORTEST_PATH() // Кратчайший путь между двумя вершинами с помощью обхода в ширину
+{
+	cout << "Кратчайший путь между двумя вершинами" << endl;
+	vector <int> path;
+	vector <bool> visited;
+	vector <int> p, d; // p - массив предков, d - массив длин путей
+	p.resize(k.size(), -1);
+	d.resize(k.size());
+	visited.resize(k.size());
+	int first, second;
+	cout << "Введите вершину: " << endl;
+	cin >> first;
+	cout << endl;
+	cout << "Введите вторую вершину: ";
+	cin >> second;
+	first; 
+	second; 
+	priority_queue <pair<int, int>> s;
+	visited.resize(k.size());
+	visited[first] = true;
+	p[first] = -1;
+	s.push(make_pair(0, first));
+	while (!s.empty())
+	{
+		int w = s.top().second;
+		visited[w] = true;
+		s.pop();
+		path.push_back(w);
+		for (size_t i = 0; i < k[w].size(); i++)
+		{
+			if (!visited[k[w][i].second] && (d[k[w][i].second] == 0 || d[w] + k[w][i].first < d[k[w][i].second]))
+			{
+				s.push(make_pair(-k[w][i].first, k[w][i].second));
+				d[k[w][i].second] = d[w] + k[w][i].first; // увеличиваем значение пути
+				p[k[w][i].second] = w; // добавляем предка
+			}
+		}
+	}
+	if (!visited[second])
+		cout << "Ïóòè íå ñóùåñòâóåò \n";
+	else
+	{
+		vector <int> shortest_path;
+		for (int v = second; v != -1; v = p[v])
+			shortest_path.push_back(v);  // кратчайший пусть между двумя вершинами
+		reverse(shortest_path.begin(), shortest_path.end());
+		cout << "Path: ";
+		for (size_t i = 0; i < shortest_path.size(); ++i)
+			cout << shortest_path[i] << " ";
+	}
+}
+
+void SHORTEST_PATH_FOR_ALL() // Кратчайший путь между всеми парами вершин
+{
+	cout << "Кратчайший путь между всеми парами вершин" << endl;
+	vector <int> path;
+	vector <bool> visited;
+	vector <int> shortest_path, p, d; // p - массив предков, d - массив длин путей
+	p.resize(k.size());
+	d.resize(k.size());
+	int first;
+	cout << "Введите вершину: ";
+	cin >> first;
+	first;
+	priority_queue <pair<int,int>> s;
+	visited.resize(k.size());
+	visited[first] = true;
+	p[first] = -1;
+	s.push(make_pair(0,first));
+	while (!s.empty())
+	{
+		int w = s.top().second;
+		visited[w] = true;
+		s.pop();
+		path.push_back(w);
+		for (size_t i = 0; i < k[w].size(); i++)
+		{
+			if(!visited[k[w][i].second] && (d[k[w][i].second] == 0 || d[w] + k[w][i].first < d[k[w][i].second]))
+			{
+				s.push(make_pair(-k[w][i].first, k[w][i].second));
+				d[k[w][i].second] = d[w] + k[w][i].first; 
+				p[k[w][i].second] = w; 
+			}
+		}
+	}
+	vector <pair<int, int>> shortest_path2;
+	for (int v = 0; v < d.size(); v++)
+	{
+		if (d[v] != 0)
+			shortest_path2.push_back(make_pair(v, d[v])); // кратчайший путь между всеми парами вершин
+	}
+	cout << "Shortest path: " << endl;;
+	for (vector <pair<int, int>> ::iterator it = shortest_path2.begin(); it != shortest_path2.end(); it++)
+		cout << it->first << " " << it->second << " " << endl;
+}
