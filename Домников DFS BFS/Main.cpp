@@ -24,11 +24,11 @@ int main()
 	setlocale(LC_ALL, "Russian");
 	input();
 	int v;
-	cout << "Введите вершину ";
+	cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГўГҐГ°ГёГЁГ­Гі ";
 	cin >> v;
 	v--;;
 	DFS(v);
-	cout << "Обход в глубину" << endl;
+	cout << "ГЋГЎГµГ®Г¤ Гў ГЈГ«ГіГЎГЁГ­Гі" << endl;
 	for (int i = 0; i < path.size(); i++)
 		cout << path[i] + 1 << endl;
 	BFS(v);
@@ -38,7 +38,7 @@ int main()
 	system("pause");
 }
 
-void input() // Ввод графа из списка смежности
+void input() // Г‚ГўГ®Г¤ ГЈГ°Г ГґГ  ГЁГ§ Г±ГЇГЁГ±ГЄГ  Г±Г¬ГҐГ¦Г­Г®Г±ГІГЁ
 {
 	int m, n, maxSize = 0;
 	fstream fin("C://work.txt");
@@ -64,7 +64,7 @@ void input() // Ввод графа из списка смежности
 	fin.close();
 }
 
-void output() // Вывод в файл
+void output() // Г‚Г»ГўГ®Г¤ Гў ГґГ Г©Г«
 {
 	fstream fout("C://foutWork.txt");
 	if (!fout.is_open())
@@ -82,7 +82,7 @@ void output() // Вывод в файл
 	fout.close();
 }
 
-void DFS(int v) // Рекурсивый обход в глубину
+void DFS(int v) // ГђГҐГЄГіГ°Г±ГЁГўГ»Г© Г®ГЎГµГ®Г¤ Гў ГЈГ«ГіГЎГЁГ­Гі
 {
 	visited.resize(k.size());
 	visited[v] = true;
@@ -97,7 +97,7 @@ void DFS(int v) // Рекурсивый обход в глубину
 	}
 }
 
-void components() // Поиск компонент графа
+void components() // ГЏГ®ГЁГ±ГЄ ГЄГ®Г¬ГЇГ®Г­ГҐГ­ГІ ГЈГ°Г ГґГ 
 {
 	vector <vector<int>> component;
 	visited.resize(k.size());
@@ -115,30 +115,30 @@ void components() // Поиск компонент графа
 		component.push_back(path);
 	for (size_t i = 0; i < component.size(); i++)
 	{
-		cout << "Компонента " << i + 1 << ":";
+		cout << "ГЉГ®Г¬ГЇГ®Г­ГҐГ­ГІГ  " << i + 1 << ":";
 		for (size_t j = 0; j < component[i].size(); j++)
 			cout << component[i][j] + 1 << " ";
 		cout << endl;
 	}
 }
 
-void SHORTEST_PATH() // Кратчайший путь между двумя вершинами с помощью обхода в ширину
+void SHORTEST_PATH() // ГЉГ°Г ГІГ·Г Г©ГёГЁГ© ГЇГіГІГј Г¬ГҐГ¦Г¤Гі Г¤ГўГіГ¬Гї ГўГҐГ°ГёГЁГ­Г Г¬ГЁ Г± ГЇГ®Г¬Г®Г№ГјГѕ Г®ГЎГµГ®Г¤Г  Гў ГёГЁГ°ГЁГ­Гі
 {
-	cout << "Кратчайший путь между двумя вершинами" << endl;
+	cout << "ГЉГ°Г ГІГ·Г Г©ГёГЁГ© ГЇГіГІГј Г¬ГҐГ¦Г¤Гі Г¤ГўГіГ¬Гї ГўГҐГ°ГёГЁГ­Г Г¬ГЁ" << endl;
 	vector <int> path;
 	vector <bool> visited;
-	vector <int> p, d; // p - массив предков, d - массив длин путей
+	vector <int> p, d; // p - Г¬Г Г±Г±ГЁГў ГЇГ°ГҐГ¤ГЄГ®Гў, d - Г¬Г Г±Г±ГЁГў Г¤Г«ГЁГ­ ГЇГіГІГҐГ©
 	p.resize(k.size());
 	d.resize(k.size());
 	visited.resize(k.size());
 	int first, second;
-	cout << "Введите вершину: ";
+	cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГўГҐГ°ГёГЁГ­Гі: ";
 	cin >> first;
 	cout << endl;
-	cout << "Введите вторую вершину: ";
+	cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГўГІГ®Г°ГіГѕ ГўГҐГ°ГёГЁГ­Гі: ";
 	cin >> second;
-	first--; // Первая вершина
-	second--; // Вторая вершина
+	first--; // ГЏГҐГ°ГўГ Гї ГўГҐГ°ГёГЁГ­Г 
+	second--; // Г‚ГІГ®Г°Г Гї ГўГҐГ°ГёГЁГ­Г 
 	queue <int> s;
 	visited.resize(k.size());
 	visited[first] = true;
@@ -156,18 +156,18 @@ void SHORTEST_PATH() // Кратчайший путь между двумя вершинами с помощью обхода в
 			{
 				s.push(k[w][i]);
 				visited[k[w][i]] = true;
-				d[k[w][i]] = d[w] + 1; // увеличиваем значение пути
-				p[k[w][i]] = w; // добавляем предка
+				d[k[w][i]] = d[w] + 1; // ГіГўГҐГ«ГЁГ·ГЁГўГ ГҐГ¬ Г§Г­Г Г·ГҐГ­ГЁГҐ ГЇГіГІГЁ
+				p[k[w][i]] = w; // Г¤Г®ГЎГ ГўГ«ГїГҐГ¬ ГЇГ°ГҐГ¤ГЄГ 
 			}
 		}
 	}
 	if (!visited[second])
-		cout << "Пути не существует \n";
+		cout << "ГЏГіГІГЁ Г­ГҐ Г±ГіГ№ГҐГ±ГІГўГіГҐГІ \n";
 	else
 	{
 		vector <int> shortest_path;
 		for (int v = second; v != -1; v = p[v])
-			shortest_path.push_back(v);                        // кратчайший пусть между двумя вершинами
+			shortest_path.push_back(v);                        // ГЄГ°Г ГІГ·Г Г©ГёГЁГ© ГЇГіГ±ГІГј Г¬ГҐГ¦Г¤Гі Г¤ГўГіГ¬Гї ГўГҐГ°ГёГЁГ­Г Г¬ГЁ
 		reverse(shortest_path.begin(), shortest_path.end());
 		cout << "Path: ";
 		for (size_t i = 0; i < shortest_path.size(); ++i)
@@ -175,16 +175,16 @@ void SHORTEST_PATH() // Кратчайший путь между двумя вершинами с помощью обхода в
 	}
 }
 
-void SHORTEST_PATH_FOR_ALL() // Кратчайший путь между всеми парами вершин
+void SHORTEST_PATH_FOR_ALL() // ГЉГ°Г ГІГ·Г Г©ГёГЁГ© ГЇГіГІГј Г¬ГҐГ¦Г¤Гі ГўГ±ГҐГ¬ГЁ ГЇГ Г°Г Г¬ГЁ ГўГҐГ°ГёГЁГ­
 {
-	cout << "Кратчайший путь между всеми парами вершин" << endl;
+	cout << "ГЉГ°Г ГІГ·Г Г©ГёГЁГ© ГЇГіГІГј Г¬ГҐГ¦Г¤Гі ГўГ±ГҐГ¬ГЁ ГЇГ Г°Г Г¬ГЁ ГўГҐГ°ГёГЁГ­" << endl;
 	vector <int> path;
 	vector <bool> visited;
-	vector <int> shortest_path, p, d; // p - массив предков, d - массив длин путей
+	vector <int> shortest_path, p, d; // p - Г¬Г Г±Г±ГЁГў ГЇГ°ГҐГ¤ГЄГ®Гў, d - Г¬Г Г±Г±ГЁГў Г¤Г«ГЁГ­ ГЇГіГІГҐГ©
 	p.resize(k.size());
 	d.resize(k.size());
 	int first;
-	cout << "Введите вершину: ";
+	cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГўГҐГ°ГёГЁГ­Гі: ";
 	cin >> first;
 	first--;
 	queue <int> s;
@@ -204,8 +204,8 @@ void SHORTEST_PATH_FOR_ALL() // Кратчайший путь между всеми парами вершин
 			{
 				s.push(k[w][i]);
 				visited[k[w][i]] = true;
-				d[k[w][i]] = d[w] + 1; // увеличиваем значение пути
-				p[k[w][i]] = w; // добавляем предка
+				d[k[w][i]] = d[w] + 1; // ГіГўГҐГ«ГЁГ·ГЁГўГ ГҐГ¬ Г§Г­Г Г·ГҐГ­ГЁГҐ ГЇГіГІГЁ
+				p[k[w][i]] = w; // Г¤Г®ГЎГ ГўГ«ГїГҐГ¬ ГЇГ°ГҐГ¤ГЄГ 
 			}
 		}
 	}
@@ -213,7 +213,7 @@ void SHORTEST_PATH_FOR_ALL() // Кратчайший путь между всеми парами вершин
 	for (int v = 0; v < d.size(); v++)
 	{
 		if (d[v] != 0)
-			shortest_path2.push_back(make_pair(v, d[v])); // кратчайший путь между всеми парами вершин
+			shortest_path2.push_back(make_pair(v, d[v])); // ГЄГ°Г ГІГ·Г Г©ГёГЁГ© ГЇГіГІГј Г¬ГҐГ¦Г¤Гі ГўГ±ГҐГ¬ГЁ ГЇГ Г°Г Г¬ГЁ ГўГҐГ°ГёГЁГ­
 	}
 	cout << "Shortest path: " << endl;;
 	for (vector <pair<int, int>> ::iterator it = shortest_path2.begin(); it != shortest_path2.end(); it++)
@@ -222,7 +222,7 @@ void SHORTEST_PATH_FOR_ALL() // Кратчайший путь между всеми парами вершин
 
 void BFS(int v)
 {
-	cout << "Обход в ширину " << endl;
+	cout << "ГЋГЎГµГ®Г¤ Гў ГёГЁГ°ГЁГ­Гі " << endl;
 	vector <int> path;
 	vector <bool> visited;
 	queue <int> s;
